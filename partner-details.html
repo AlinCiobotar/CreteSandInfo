@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner Details - Crete Info</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="config.js"></script>
+    <style>
+        .partner-header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .partner-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+        
+        .partner-header .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .partner-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .partner-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+        
+        .partner-location-header {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .back-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+            border-color: rgba(255,255,255,0.5);
+            color: white;
+        }
+        
+        .partner-content {
+            padding: 60px 0;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+        
+        .partner-info {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .info-section {
+            margin-bottom: 30px;
+        }
+        
+        .info-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-description {
+            color: #666;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        .contact-grid {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            background: #e9ecef;
+        }
+        
+        .contact-icon {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .contact-details h4 {
+            margin: 0;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .contact-details p {
+            margin: 5px 0 0 0;
+            color: #666;
+        }
+        
+        .contact-details a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .contact-details a:hover {
+            text-decoration: underline;
+        }
+        
+        .partner-gallery {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 8px;
+        }
+        
+        .gallery-item {
+            aspect-ratio: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gallery-placeholder {
+            background: linear-gradient(45deg, #f1f2f6, #ddd);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 2rem;
+            height: 100%;
+        }
+        
+        .no-images {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            padding: 40px;
+        }
+        
+        .location-map {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .map-btn {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .map-btn:hover {
+            background: linear-gradient(135deg, #c0392b, #a93226);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .partner-title {
+                font-size: 2.2rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .partner-info,
+            .partner-gallery {
+                padding: 25px;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Crete Info</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="partner-header">
+        <div class="container">
+            <div style="text-align: center;">
+                <h1 id="partnerName" class="partner-title">Loading...</h1>
+                <p id="partnerCategory" class="partner-subtitle"></p>
+                <div id="partnerLocationHeader" class="partner-location-header">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span id="partnerLocation"></span>
+                </div>
+                <a href="#" id="backButton" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> Back to Category
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="partner-content">
+        <div class="container">
+            <div class="content-grid">
+                <div class="partner-info">
+                    <div class="info-section">
+                        <h2 class="info-title">
+                            <i class="fas fa-info-circle"></i>
+                            About
+                        </h2>
+                        <p id="partnerDescription" class="info-description"></p>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h3 class="info-title">
+                            <i class="fas fa-phone"></i>
+                            Contact Information
+                        </h3>
+                        <div id="contactGrid" class="contact-grid">
+                            <!-- Contact information will be loaded here -->
+                        </div>
+                    </div>
+                    
+                    <div id="locationSection" class="location-map">
+                        <h4>
+                            <i class="fas fa-map-marker-alt"></i>
+                            Location
+                        </h4>
+                        <p id="fullLocation"></p>
+                        <a href="#" id="mapLink" class="map-btn" target="_blank">
+                            <i class="fas fa-map"></i>
+                            View on Map
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="partner-gallery">
+                    <h2 class="info-title">
+                        <i class="fas fa-images"></i>
+                        Gallery
+                    </h2>
+                    <div id="galleryGrid" class="gallery-grid">
+                        <!-- Images will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let currentPartner = null;
+        
+        // Category mappings for back navigation and folder paths
+        const categoryMappings = {
+            'accommodations': {
+                page: 'accommodations.html',
+                title: 'Accommodations',
+                folder: 'Accommodations'
+            },
+            'restaurants': {
+                page: 'restaurants.html', 
+                title: 'Restaurants',
+                folder: 'Restaurants'
+            },
+            'taxi': {
+                page: 'taxi.html',
+                title: 'Taxi Services', 
+                folder: 'Taxi'
+            },
+            'boats': {
+                page: 'boats.html',
+                title: 'Boat Services',
+                folder: 'Boats'
+            },
+            'excursions': {
+                page: 'excursions.html',
+                title: 'Excursions',
+                folder: 'Excursions'
+            },
+            'rent-car': {
+                page: 'rent-car.html',
+                title: 'Car Rentals',
+                folder: 'Rent a car'
+            },
+            'weddings': {
+                page: 'weddings.html',
+                title: 'Cretan Groups',
+                folder: 'Cretan Groups'
+            }
+        };
+
+        async function loadPartnerDetails() {
+            try {
+                // Get partner ID from URL parameters
+                const urlParams = new URLSearchParams(window.location.search);
+                const partnerId = urlParams.get('id');
+                
+                if (!partnerId) {
+                    showError('No partner ID provided');
+                    return;
+                }
+
+                // Load partners data
+                const response = await fetch('partners_data.json');
+                const partners = await response.json();
+                
+                // Find the specific partner
+                currentPartner = partners.find(p => p.id === partnerId);
+                
+                if (!currentPartner) {
+                    showError('Partner not found');
+                    return;
+                }
+
+                displayPartnerDetails();
+                loadPartnerImages();
+                
+            } catch (error) {
+                console.error('Error loading partner details:', error);
+                showError('Error loading partner details');
+            }
+        }
+
+        function displayPartnerDetails() {
+            // Update page title
+            document.title = `${currentPartner.name} - Crete Info`;
+            
+            // Update header information
+            document.getElementById('partnerName').textContent = currentPartner.name;
+            document.getElementById('partnerCategory').textContent = categoryMappings[currentPartner.category]?.title || currentPartner.category;
+            document.getElementById('partnerLocation').textContent = currentPartner.location;
+            
+            // Update description
+            document.getElementById('partnerDescription').textContent = currentPartner.description;
+            
+            // Update full location
+            document.getElementById('fullLocation').textContent = currentPartner.location;
+            
+            // Update back button
+            const backButton = document.getElementById('backButton');
+            const categoryMapping = categoryMappings[currentPartner.category];
+            if (categoryMapping) {
+                backButton.href = categoryMapping.page;
+                backButton.innerHTML = `<i class="fas fa-arrow-left"></i> Back to ${categoryMapping.title}`;
+            }
+            
+            // Update contact information
+            updateContactInfo();
+            
+            // Update map link
+            updateMapLink();
+        }
+
+        function updateContactInfo() {
+            const contactGrid = document.getElementById('contactGrid');
+            let contactHtml = '';
+            
+            if (currentPartner.contact) {
+                contactHtml += `
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Contact Person</h4>
+                            <p>${currentPartner.contact}</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            if (currentPartner.phone) {
+                contactHtml += `
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Phone</h4>
+                            <p><a href="tel:${currentPartner.phone}">${currentPartner.phone}</a></p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            if (currentPartner.email) {
+                contactHtml += `
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p><a href="mailto:${currentPartner.email}">${currentPartner.email}</a></p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            if (currentPartner.website) {
+                contactHtml += `
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Website</h4>
+                            <p><a href="${currentPartner.website}" target="_blank">${currentPartner.website}</a></p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            if (currentPartner.airbnb) {
+                contactHtml += `
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-airbnb"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Airbnb</h4>
+                            <p><a href="${currentPartner.airbnb}" target="_blank">View Listing</a></p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            contactGrid.innerHTML = contactHtml;
+        }
+
+        function updateMapLink() {
+            const mapLink = document.getElementById('mapLink');
+            const location = encodeURIComponent(currentPartner.location + ', Crete, Greece');
+            mapLink.href = `https://www.google.com/maps/search/?api=1&query=${location}`;
+        }
+
+        async function loadPartnerImages() {
+            const galleryGrid = document.getElementById('galleryGrid');
+            
+            try {
+                // Load the images data - try compressed first, fallback to original
+                let imagesData;
+                let useCompressedImages = true;
+                
+                try {
+                    const compressedResponse = await fetch('partners_images_compressed.json');
+                    if (compressedResponse.ok) {
+                        imagesData = await compressedResponse.json();
+                        useCompressedImages = true;
+                        console.log('Using compressed images JSON');
+                    } else {
+                        const originalResponse = await fetch('partners_images.json');
+                        imagesData = await originalResponse.json();
+                        useCompressedImages = false;
+                        console.log('Using original images JSON');
+                    }
+                } catch (error) {
+                    // Fallback to original images
+                    const originalResponse = await fetch('partners_images.json');
+                    imagesData = await originalResponse.json();
+                    useCompressedImages = false;
+                    console.log('Fallback to original images JSON');
+                }
+                
+                const partnerImages = imagesData[currentPartner.id];
+                
+                if (!partnerImages || !partnerImages.images || partnerImages.images.length === 0) {
+                    galleryGrid.innerHTML = `
+                        <div class="no-images">
+                            <p>No images available for this partner yet.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                let galleryHtml = '';
+                
+                // NEW: Look for images directly in root directory with partner ID prefix
+                partnerImages.images.forEach((imageName, index) => {
+                    // Get image URLs using the new configuration
+                    const imageUrls = getImageUrlWithFallback(partnerImages.folder, imageName);
+
+                    galleryHtml += `
+                        <div class="gallery-item" onclick="openImageModal('${imageUrls.primary}', '${imageName}')">
+                            <img src="${imageUrls.primary}" alt="${currentPartner.name} - Image ${index + 1}"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="gallery-placeholder" style="display: none;">
+                                <i class="fas fa-image"></i>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                galleryGrid.innerHTML = galleryHtml;
+                
+            } catch (error) {
+                console.error('Error loading partner images:', error);
+                galleryGrid.innerHTML = `
+                    <div class="no-images">
+                        <p>Error loading images. Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
+
+        function getPartnerFolderName() {
+            // This would need to be mapped to the actual folder names
+            // For now, we'll use a simplified approach
+            const folderMappings = {
+                '11': '11. Sea side Studio',
+                '12': '12. Sea Aura Villa', 
+                '2': '2. Sougia Taxi',
+                '4': '4. Malia Cruises',
+                '23': '23. The greek cook out',
+                '1': '1. Vitorakis Travel',
+                '16': '16. Alina rent a car'
+            };
+            
+            return folderMappings[currentPartner.id] || currentPartner.name;
+        }
+
+        function openImageModal(imagePath, imageName) {
+            // Create a simple modal to display the image
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.9);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                cursor: pointer;
+            `;
+            
+            const img = document.createElement('img');
+            img.src = imagePath;
+            img.alt = imageName;
+            img.style.cssText = `
+                max-width: 90%;
+                max-height: 90%;
+                object-fit: contain;
+                border-radius: 10px;
+            `;
+            
+            modal.appendChild(img);
+            document.body.appendChild(modal);
+            
+            // Close modal when clicked
+            modal.onclick = () => {
+                document.body.removeChild(modal);
+            };
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', function escapeHandler(e) {
+                if (e.key === 'Escape') {
+                    if (document.body.contains(modal)) {
+                        document.body.removeChild(modal);
+                    }
+                    document.removeEventListener('keydown', escapeHandler);
+                }
+            });
+        }
+
+        function showError(message) {
+            document.getElementById('partnerName').textContent = 'Error';
+            document.getElementById('partnerCategory').textContent = message;
+            document.getElementById('partnerLocation').textContent = '';
+            document.getElementById('partnerDescription').textContent = 'Unable to load partner details.';
+        }
+
+        // Load partner details when page loads
+        window.addEventListener('load', loadPartnerDetails);
+    </script>
+</body>
+</html>

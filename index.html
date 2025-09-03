@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creteinfo - Discover the Mediterranean Paradise</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="config.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Welcome to Crete Info</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#weddings">Cretan Groups</a></li>
+                <li><a href="#shops">Shops</a></li>
+                <li><a href="#restaurants">Restaurants</a></li>
+                <li><a href="#taxi">Taxi</a></li>
+                <li><a href="#boats">Boats</a></li>
+                <li><a href="#excursions">Excursions</a></li>
+                <li><a href="#rent-car">Rent a car</a></li>
+                <li><a href="#accommodations">Accommodations</a></li>
+                <li><a href="info-site.html">Info Site</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-container">
+                <h2>Discover Crete</h2>
+                <p>Find everything you need in Crete - from restaurants to taxis, boats to excursions</p>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search for restaurants, taxis, hotels in Heraklion...">
+                    <button id="searchBtn" class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <div class="search-suggestions">
+                    <span class="suggestion">restaurants</span>
+                    <span class="suggestion">shops</span>
+                    <span class="suggestion">taxi</span>
+                    <span class="suggestion">boats</span>
+                    <span class="suggestion">excursions</span>
+                    <span class="suggestion">rent-car</span>
+                    <span class="suggestion">accommodations</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Crete</h1>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Beautiful Crete Beach">
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Explore Crete</h2>
+            <p class="section-subtitle">Discover the best local businesses and services in Crete</p>
+            
+            <div class="categories-grid">
+                <div class="category-card" data-category="restaurants">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Restaurants">
+                    </div>
+                    <div class="category-content">
+                        <h3>Restaurants</h3>
+                        <p>Discover authentic Greek cuisine and international dining options</p>
+                        <button class="explore-btn" onclick="window.location.href='restaurants.html'">View All Restaurants</button>
+                    </div>
+                </div>
+
+                <div class="category-card" data-category="weddings">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Cretan Groups">
+                    </div>
+                    <div class="category-content">
+                        <h3>Cretan Groups</h3>
+                        <p>Join local groups and communities to experience authentic Crete</p>
+                        <button class="explore-btn" onclick="window.location.href='weddings.html'">View All Cretan Groups</button>
+                    </div>
+                </div>
+
+                <div class="category-card" data-category="shops">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Shops">
+                    </div>
+                    <div class="category-content">
+                        <h3>Shops</h3>
+                        <p>Find local crafts, souvenirs, and shopping experiences</p>
+                        <button class="explore-btn" onclick="window.location.href='shops.html'">View All Shops</button>
+                    </div>
+                </div>
+
+                <div class="category-card" data-category="taxi">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Taxi Services">
+                    </div>
+                    <div class="category-content">
+                        <h3>Taxi</h3>
+                        <p>Reliable transportation services across Crete</p>
+                        <button class="explore-btn" onclick="window.location.href='taxi.html'">View All Taxi Services</button>
+                    </div>
+                </div>
+
+                <div class="category-card" data-category="boats">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Boats">
+                    </div>
+                    <div class="category-content">
+                        <h3>Boats</h3>
+                        <p>Explore the Mediterranean with boat tours and rentals</p>
+                        <button class="explore-btn" onclick="window.location.href='boats.html'">View All Boat Services</button>
+                    </div>
+                </div>
+
+                <div class="category-card" data-category="excursions">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Excursions">
+                    </div>
+                    <div class="category-content">
+                        <h3>Excursions</h3>
+                        <p>Guided tours and adventure experiences in Crete</p>
+                        <button class="explore-btn" onclick="window.location.href='excursions.html'">View All Excursions</button>
+                    </div>
+                </div>
+
+                <div class="category-card" data-category="rent-car">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Rent a Car">
+                    </div>
+                    <div class="category-content">
+                        <h3>Rent a Car</h3>
+                        <p>Freedom to explore Crete at your own pace</p>
+                        <button class="explore-btn" onclick="window.location.href='rent-car.html'">View All Car Rentals</button>
+                    </div>
+                </div>
+
+                <div class="category-card" data-category="accommodations">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Accommodations">
+                    </div>
+                    <div class="category-content">
+                        <h3>Accommodations</h3>
+                        <p>Find the perfect place to stay during your Crete adventure</p>
+                        <button class="explore-btn" onclick="window.location.href='accommodations.html'">View All Accommodations</button>
+                    </div>
+                </div>
+
+                <div class="category-card" data-category="info-site">
+                    <div class="category-image">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Info Site">
+                    </div>
+                    <div class="category-content">
+                        <h3>Info Site</h3>
+                        <p>Discover useful information and resources about Crete</p>
+                        <button class="explore-btn" onclick="window.location.href='info-site.html'">View All Info</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Results Section -->
+    <section id="searchResults" class="search-results" style="display: none;">
+        <div class="container">
+            <div class="results-header">
+                <h2 id="resultsTitle">Search Results</h2>
+                <button class="back-btn" onclick="hideSearchResults()">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </button>
+            </div>
+            <div id="resultsGrid" class="results-grid">
+                <!-- Results will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Results Section -->
+    <section id="categoryResults" class="category-results" style="display: none;">
+        <div class="container">
+            <div class="results-header">
+                <h2 id="categoryTitle">Category Results</h2>
+                <button class="back-btn" onclick="hideCategoryResults()">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </button>
+            </div>
+            <div id="categoryGrid" class="category-grid">
+                <!-- Category results will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <div class="about-content">
+                <h2>Crete Travel Directory</h2>
+                <p>Discover the authentic beauty of Crete with our trusted local partners. From crystal clear waters to ancient ruins, experience the Mediterranean paradise.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#destinations">Destinations</a></li>
+                        <li><a href="#tour-packages">Tour Packages</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Choose Region</h3>
+                    <ul>
+                        <li><a href="#bora-bora">Bora Bora</a></li>
+                        <li><a href="#maldives">Maldives</a></li>
+                        <li><a href="#seychelles">Seychelles</a></li>
+                        <li><a href="#phuket">Phuket</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-envelope"></i> info@example.com</p>
+                    <p><i class="fas fa-phone"></i> +1 (143) 456-7897</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Glassford Street New York, USA</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Location</h3>
+                    <div class="map-container">
+                        <iframe
+                            src="https://www.google.com/maps?q=Heraklion&output=embed"
+                            width="300"
+                            height="200"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Adventure WordPress Theme By WP Radiant | Proudly powered by WordPress</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

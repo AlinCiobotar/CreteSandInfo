@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cretan Groups - Crete Info</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="category-page.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Crete Info</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="category-header">
+        <div class="container">
+            <h1 class="category-title">
+                <i class="fas fa-users"></i> Cretan Groups
+            </h1>
+            <p class="category-subtitle">
+                Plan your dream wedding in the beautiful settings of Crete
+            </p>
+            <button class="back-btn" onclick="window.location.href='index.html'">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </button>
+        </div>
+    </section>
+
+    <section class="partners-section">
+        <div class="container">
+            <div id="partnersGrid" class="partners-grid">
+                <!-- Partners will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+    <script src="category-page.js"></script>
+    <script>
+        window.addEventListener('load', () => loadPartners('weddings', 'heart'));
+    </script>
+</body>
+</html>
+
