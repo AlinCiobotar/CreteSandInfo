@@ -729,7 +729,7 @@ function showCity(cityName) {
     }
 
     document.querySelector('.hero').style.display = 'none';
-    document.querySelector('.categories').style.display = 'block';
+    document.querySelector('.categories').style.display = 'none';
     document.querySelector('.about').style.display = 'none';
     document.querySelector('.footer').style.display = 'none';
     categorySection.style.display = 'block';
