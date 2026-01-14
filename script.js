@@ -696,14 +696,14 @@ function showCity(cityName) {
     const categoryTitle = document.getElementById('categoryTitle');
     const categoryGrid = document.getElementById('categoryGrid');
 
-    categoryTitle.textContent = `Servicii în ${cityName}`;
+    categoryTitle.textContent = `Services in ${cityName}`;
 
     if (cityResults.length === 0) {
         categoryGrid.innerHTML = `
             <div style="text-align: center; grid-column: 1/-1; padding: 40px 20px;">
                 <i class="fas fa-city" style="font-size: 48px; color: #bdc3c7; margin-bottom: 20px;"></i>
-                <p style="color: #7f8c8d; font-size: 18px; margin-bottom: 10px;">Momentan nu avem parteneri în ${cityName}.</p>
-                <p style="color: #95a5a6; font-size: 14px;">Revenim curând cu parteneri noi din acest oraș.</p>
+                <p style="color: #7f8c8d; font-size: 18px; margin-bottom: 10px;">We currently don't have partners in ${cityName}.</p>
+                <p style="color: #95a5a6; font-size: 14px;">New partners from this city will be added soon.</p>
             </div>
         `;
     } else {
