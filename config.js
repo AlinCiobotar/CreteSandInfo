@@ -23,25 +23,18 @@ const IMAGE_CONFIG = {
 
 // Funcție pentru a obține URL-ul complet al unei imagini
 function getImageUrl(folder, imageName, useCompressed = true) {
-    // Opțiunea 1: Folosește Cloudflare R2 (actual)
-    // const fileName = `${folder}-${imageName}`;
-    // return `${IMAGE_CONFIG.cloudflareUrl}/${fileName}`;
-    
-    // Opțiunea 2: Folosește Supabase Storage
-    const fileName = `${folder}-${imageName}`;
-    return `${IMAGE_CONFIG.supabaseUrl}/${fileName}`;
-    
-    // Opțiunea 3: Folosește GitHub Pages
-    // return `${IMAGE_CONFIG.baseUrl}/${IMAGE_CONFIG.compressedPath}/${folder}/${imageName}`;
+    // NOU: folosim structura locală:
+    // images/<client-name>/poze/<image-file>
+    return `images/${folder}/poze/${imageName}`;
 }
 
 // Funcție pentru a obține URL-ul cu fallback automat
 function getImageUrlWithFallback(folder, imageName) {
     const primaryUrl = getImageUrl(folder, imageName, true);
-    
-    // Fallback pentru dezvoltare locală
-    const fallbackUrl = `images/partners-compressed/${folder}/${imageName}`;
-    
+
+    // Fallback pentru dezvoltare locală (ținând același format de path local)
+    const fallbackUrl = `images/${folder}/poze/${imageName}`;
+
     return {
         primary: primaryUrl,
         fallback: fallbackUrl
