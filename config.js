@@ -21,19 +21,27 @@ const IMAGE_CONFIG = {
     originalPath: "images/partners"
 };
 
+// Rădăcina site-ului pe GitHub Pages (merge și local): scoatem ultimul segment din path
+function getSiteBasePath() {
+    if (typeof window === 'undefined') return '';
+    const path = window.location.pathname;
+    // ex: /CreteInfo/index.html -> /CreteInfo/
+    return path.replace(/\\/[^\\/]*$/, '/').replace(/\\/index\\.html$/, '').replace(/\\/$/, '/') || '/';
+}
+
 // Funcție pentru a obține URL-ul complet al unei imagini
 function getImageUrl(folder, imageName, useCompressed = true) {
-    // NOU: folosim structura locală:
-    // images/<client-name>/poze/<image-file>
-    return `images/${folder}/poze/${imageName}`;
+    // images/<client-name>/poze/<image-file> relative la rădăcina site-ului (user sau project page)
+    const base = getSiteBasePath();
+    return `${base}images/${folder}/poze/${imageName}`;
 }
 
 // Funcție pentru a obține URL-ul cu fallback automat
 function getImageUrlWithFallback(folder, imageName) {
     const primaryUrl = getImageUrl(folder, imageName, true);
 
-    // Fallback pentru dezvoltare locală (ținând același format de path local)
-    const fallbackUrl = `images/${folder}/poze/${imageName}`;
+    // Fallback pentru dezvoltare locală (aceeași structură)
+    const fallbackUrl = primaryUrl;
 
     return {
         primary: primaryUrl,
