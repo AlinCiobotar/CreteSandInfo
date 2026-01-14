@@ -21,28 +21,27 @@ const IMAGE_CONFIG = {
     originalPath: "images/partners"
 };
 
-// Rădăcina site-ului pe GitHub Pages (merge și local): scoatem ultimul segment din path
-function getSiteBasePath() {
-    if (typeof window === 'undefined') return '';
-    const path = window.location.pathname;
-    // ex: /CreteInfo/index.html -> /CreteInfo/
-    return path.replace(/\\/[^\\/]*$/, '/').replace(/\\/index\\.html$/, '').replace(/\\/$/, '/') || '/';
-}
-
 // Funcție pentru a obține URL-ul complet al unei imagini
 function getImageUrl(folder, imageName, useCompressed = true) {
-    // images/<client-name>/poze/<image-file> relative la rădăcina site-ului (user sau project page)
-    const base = getSiteBasePath();
-    return `${base}images/${folder}/poze/${imageName}`;
+    // Opțiunea 1: Folosește Cloudflare R2 (actual)
+    // const fileName = `${folder}-${imageName}`;
+    // return `${IMAGE_CONFIG.cloudflareUrl}/${fileName}`;
+    
+    // Opțiunea 2: Folosește Supabase Storage
+    const fileName = `${folder}-${imageName}`;
+    return `${IMAGE_CONFIG.supabaseUrl}/${fileName}`;
+    
+    // Opțiunea 3: Folosește GitHub Pages
+    // return `${IMAGE_CONFIG.baseUrl}/${IMAGE_CONFIG.compressedPath}/${folder}/${imageName}`;
 }
 
 // Funcție pentru a obține URL-ul cu fallback automat
 function getImageUrlWithFallback(folder, imageName) {
     const primaryUrl = getImageUrl(folder, imageName, true);
-
-    // Fallback pentru dezvoltare locală (aceeași structură)
-    const fallbackUrl = primaryUrl;
-
+    
+    // Fallback pentru dezvoltare locală
+    const fallbackUrl = `images/partners-compressed/${folder}/${imageName}`;
+    
     return {
         primary: primaryUrl,
         fallback: fallbackUrl
