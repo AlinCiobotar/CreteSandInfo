@@ -316,6 +316,30 @@ body {
     box-shadow: 0 5px 15px rgba(2, 136, 209, 0.3);
 }
 
+/* City links inside Cities card */
+.city-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.city-link {
+    background: rgba(2, 136, 209, 0.1);
+    color: #0277bd;
+    border: 1px solid #0277bd;
+    border-radius: 16px;
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.city-link:hover {
+    background: #0277bd;
+    color: white;
+}
+
 /* Search Results Section */
 .search-results, .category-results {
     padding: 5rem 0;

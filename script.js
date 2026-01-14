@@ -383,11 +383,6 @@ function smartSearch(query) {
     let locationFilter = null;
     let searchTerms = [];
 
-    // Special case: if query is "crete" or contains "crete", return all businesses
-    if (query.toLowerCase().includes('crete')) {
-        return businesses;
-    }
-
     // Parse the query to identify category and location
     words.forEach(word => {
         // Check if word is a category
@@ -505,11 +500,7 @@ function displaySearchResults(results, query) {
 
     // Create descriptive title
     let titleText = `Search Results for "${query}"`;
-    
-    // Special case for "Crete" search
-    if (query.toLowerCase().includes('crete')) {
-        titleText = `All Partners in Crete (${results.length} found)`;
-    } else if (detectedCategory && detectedLocation) {
+    if (detectedCategory && detectedLocation) {
         const categoryName = getCategoryDisplayName(detectedCategory);
         const locationName = detectedLocation.charAt(0).toUpperCase() + detectedLocation.slice(1);
         titleText = `${categoryName} in ${locationName} (${results.length} found)`;
@@ -549,10 +540,7 @@ function displaySearchResults(results, query) {
     if (results.length === 0) {
         let noResultsMessage = 'No results found.';
         
-        // Special case for "Crete" search
-        if (query.toLowerCase().includes('crete')) {
-            noResultsMessage = 'No partners found in Crete yet. New partners will be added soon!';
-        } else if (detectedCategory && detectedLocation) {
+        if (detectedCategory && detectedLocation) {
             const categoryName = getCategoryDisplayName(detectedCategory);
             const locationName = detectedLocation.charAt(0).toUpperCase() + detectedLocation.slice(1);
             noResultsMessage = `No ${categoryName.toLowerCase()} found in ${locationName}. New partners will be added soon!`;
@@ -609,7 +597,7 @@ function getCategoryDisplayName(category) {
         'boats': 'Boat Services',
         'excursions': 'Excursions',
         'rent-car': 'Car Rentals',
-        'weddings': 'Cretan Groups',
+        'weddings': 'Wedding Services',
         'shops': 'Shops'
     };
     return displayNames[category] || category;
@@ -623,7 +611,7 @@ function getCategoryIcon(category) {
         'boats': 'ship',
         'excursions': 'mountain',
         'rent-car': 'car',
-        'weddings': 'users',
+        'weddings': 'heart',
         'shops': 'shopping-bag'
     };
     return icons[category] || 'store';
@@ -655,7 +643,7 @@ function showCategory(category) {
 
     const categoryNames = {
         'restaurants': 'Restaurants',
-        'weddings': 'Cretan Groups',
+        'weddings': 'Wedding Services',
         'shops': 'Shops',
         'taxi': 'Taxi Services',
         'boats': 'Boat Services',
@@ -693,6 +681,66 @@ function hideCategoryResults() {
     document.querySelector('.about').style.display = 'block';
     document.querySelector('.footer').style.display = 'block';
 }
+
+// City functionality - show businesses filtered by city name
+function showCity(cityName) {
+    const normalizedCity = cityName.toLowerCase();
+    const cityResults = businesses.filter(business => 
+        (business.location || '').toLowerCase().includes(normalizedCity)
+    );
+
+    const categorySection = document.getElementById('categoryResults');
+    const categoryTitle = document.getElementById('categoryTitle');
+    const categoryGrid = document.getElementById('categoryGrid');
+
+    categoryTitle.textContent = `Servicii în ${cityName}`;
+
+    if (cityResults.length === 0) {
+        categoryGrid.innerHTML = `
+            <div style="text-align: center; grid-column: 1/-1; padding: 40px 20px;">
+                <i class="fas fa-city" style="font-size: 48px; color: #bdc3c7; margin-bottom: 20px;"></i>
+                <p style="color: #7f8c8d; font-size: 18px; margin-bottom: 10px;">Momentan nu avem parteneri în ${cityName}.</p>
+                <p style="color: #95a5a6; font-size: 14px;">Revenim curând cu parteneri noi din acest oraș.</p>
+            </div>
+        `;
+    } else {
+        categoryGrid.innerHTML = cityResults.map(business => `
+            <div class="business-card" onclick="viewPartnerDetails('${business.id}')">
+                <div class="business-image">
+                    <img src="${business.image}" alt="${business.name}">
+                </div>
+                <div class="business-content">
+                    <h3>${business.name}</h3>
+                    <div class="business-category">
+                        <i class="fas fa-${getCategoryIcon(business.category)}"></i>
+                        ${getCategoryDisplayName(business.category)}
+                    </div>
+                    <p>${business.description}</p>
+                    <div class="business-location">
+                        <i class="fas fa-map-marker-alt"></i>
+                        ${business.location}
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    document.querySelector('.hero').style.display = 'none';
+    document.querySelector('.categories').style.display = 'block';
+    document.querySelector('.about').style.display = 'none';
+    document.querySelector('.footer').style.display = 'none';
+    categorySection.style.display = 'block';
+}
+
+// Wire up city buttons once DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.city-link').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const city = btn.getAttribute('data-city');
+            showCity(city);
+        });
+    });
+});
 
 function showBusinessDetails(businessId) {
     const business = businesses.find(b => b.id === businessId);
