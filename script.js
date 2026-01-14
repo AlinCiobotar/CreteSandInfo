@@ -353,6 +353,7 @@ const locationVariations = {
     'kissamos': ['kissamos', 'kastelli', 'kasteli'],
     'sougia': ['sougia', 'soughia'],
     'malia': ['malia', 'mallia'],
+    'hersonissos': ['hersonissos', 'hersonisos', 'hersonissos crete'],
     'agia pelagia': ['agia pelagia', 'ag pelagia', 'aghia pelagia'],
     'ammoudara': ['ammoudara', 'heraklion'],
     'papaderou': ['papaderou', 'sougia']
@@ -684,10 +685,12 @@ function hideCategoryResults() {
 
 // City functionality - show businesses filtered by city name
 function showCity(cityName) {
-    const normalizedCity = cityName.toLowerCase();
-    const cityResults = businesses.filter(business => 
-        (business.location || '').toLowerCase().includes(normalizedCity)
-    );
+    const normalizedCity = cityName.toLowerCase().trim();
+    const variants = locationVariations[normalizedCity] || [normalizedCity];
+    const cityResults = businesses.filter(business => {
+        const loc = (business.location || '').toLowerCase();
+        return variants.some(v => loc.includes(v.toLowerCase()));
+    });
 
     const categorySection = document.getElementById('categoryResults');
     const categoryTitle = document.getElementById('categoryTitle');
@@ -737,7 +740,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.city-link').forEach(btn => {
         btn.addEventListener('click', () => {
             const city = btn.getAttribute('data-city');
-            showCity(city);
+            if (city) showCity(city);
         });
     });
 });
