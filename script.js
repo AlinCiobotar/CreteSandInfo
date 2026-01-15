@@ -139,6 +139,7 @@ function getPartnerImage(partner) {
     // Map partner names to their image folders
     const partnerImageMap = {
         'The Greek Cook Out': 'greek-cook-out',
+        'Sea side Studio': 'Sea-side-Studio',
         'Taverna Akrogiali': 'taverna-akrogiali', 
         'Sunset Taverna': 'sunset-taverna',
         'Allar Dinner Show': 'allar-dinner-show',
