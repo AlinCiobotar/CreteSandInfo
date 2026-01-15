@@ -28,7 +28,7 @@ function getImageUrl(folder, imageName, useCompressed = true) {
     // return `${IMAGE_CONFIG.cloudflareUrl}/${fileName}`;
     
     // Opțiunea 2: Folosește Supabase Storage
-    const fileName = `${folder}-${imageName}`;
+    const fileName = `${folder}/${imageName}`;
     return `${IMAGE_CONFIG.supabaseUrl}/${fileName}`;
     
     // Opțiunea 3: Folosește GitHub Pages
