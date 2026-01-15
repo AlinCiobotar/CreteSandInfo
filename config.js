@@ -12,7 +12,7 @@ const IMAGE_CONFIG = {
     
     // URL-ul pentru imaginile de pe Supabase Storage
     // Înlocuiește cu URL-ul tău real de Supabase
-    supabaseUrl: "https://your-project-ref.supabase.co/storage/v1/object/public/your-bucket",
+    supabaseUrl: "https://alinciobotar.github.io/CreteSandInfo/images/",
     
     // Calea către imaginile comprimate
     compressedPath: "images/partners-compressed",
