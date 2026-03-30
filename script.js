@@ -1,29 +1,26 @@
 // Load partners data from JSON file
 let businesses = [];
+const partners = [
+    { id: 1, name: "Casa George", image: "images/casa-george.png" },
+    { id: 2, name: "Heraklion Taxi Service", image: "images/heraklion-taxi.png" }
+];
 
 // Load partners data on page load
 async function loadPartnersData() {
     try {
-        const [partnersResponse, imagesResponse] = await Promise.all([
-            fetch('partners_data.json'),
-            fetch('partners_images_compressed.json')
-        ]);
-        const partnersData = await partnersResponse.json();
-        const imagesData = imagesResponse.ok ? await imagesResponse.json() : {};
-        
-        // Convert partners data to business format
-        businesses = partnersData.map(partner => ({
-            id: parseInt(partner.id),
+        // Use inline partners list
+        businesses = partners.map(partner => ({
+            id: parseInt(partner.id, 10),
             name: partner.name,
-            category: partner.category,
-            location: partner.location || 'Crete',
-            description: partner.description,
-            image: getPartnerImage(partner, imagesData),
-            contact: partner.contact,
-            phone: partner.phone,
-            email: partner.email,
-            website: partner.website,
-            airbnb: partner.airbnb
+            category: partner.category || "accommodations",
+            location: partner.location || "Crete",
+            description: partner.description || "",
+            image: partner.image,
+            contact: partner.contact || "",
+            phone: partner.phone || "",
+            email: partner.email || "",
+            website: partner.website || "",
+            airbnb: partner.airbnb || ""
         }));
         
         console.log('Partners data loaded successfully:', businesses.length, 'partners');
@@ -150,14 +147,14 @@ function getPartnerImage(partner, imagesData = {}) {
 
 function getFallbackImageForCategory(category) {
     const defaultImages = {
-        'accommodations': 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-        'restaurants': 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-        'taxi': 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-        'boats': 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-        'excursions': 'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-        'rent-car': 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-        'shops': 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-        'weddings': 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
+        'accommodations': 'images/sea-aura-apartment/image-1.jpg',
+        'restaurants': 'images/Bellot/image-1.jpg',
+        'taxi': 'images/alina-rent-car/image-1.jpg',
+        'boats': 'images/malia-cruises/image-1.jpg',
+        'excursions': 'images/vittorakis-travel/image-1.jpg',
+        'rent-car': 'images/alina-rent-car/image-1.jpg',
+        'shops': 'images/Aroma Kritis/image-1.jpg',
+        'weddings': 'images/sea-aura-apartment/image-1.jpg'
     };
 
     return defaultImages[category] || defaultImages['accommodations'];
