@@ -196,7 +196,10 @@ function getPartnerImage(partner) {
         return getImageUrl(normalizedFolder, 'image-1.jpg');
     }
     
-    // Fallback to default images by category
+    return getFallbackImageForCategory(partner.category);
+}
+
+function getFallbackImageForCategory(category) {
     const defaultImages = {
         'accommodations': 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
         'restaurants': 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
@@ -207,8 +210,8 @@ function getPartnerImage(partner) {
         'shops': 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
         'weddings': 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'
     };
-    
-    return defaultImages[partner.category] || defaultImages['accommodations'];
+
+    return defaultImages[category] || defaultImages['accommodations'];
 }
 
 // Fallback sample data
@@ -565,7 +568,8 @@ function displaySearchResults(results, query) {
         resultsGrid.innerHTML = results.map(business => `
             <div class="business-card" onclick="viewPartnerDetails('${business.id}')">
                 <div class="business-image">
-                    <img src="${business.image}" alt="${business.name}">
+                    <img src="${business.image}" alt="${business.name}"
+                         onerror="this.onerror=null;this.src='${getFallbackImageForCategory(business.category)}';">
                 </div>
                 <div class="business-content">
                     <h3>${business.name}</h3>
@@ -661,7 +665,8 @@ function showCategory(category) {
     categoryGrid.innerHTML = categoryResults.map(business => `
         <div class="business-card" onclick="showBusinessDetails(${business.id})">
             <div class="business-image">
-                <img src="${business.image}" alt="${business.name}">
+                <img src="${business.image}" alt="${business.name}"
+                     onerror="this.onerror=null;this.src='${getFallbackImageForCategory(business.category)}';">
             </div>
             <div class="business-content">
                 <h3>${business.name}</h3>
@@ -714,7 +719,8 @@ function showCity(cityName) {
         categoryGrid.innerHTML = cityResults.map(business => `
             <div class="business-card" onclick="viewPartnerDetails('${business.id}')">
                 <div class="business-image">
-                    <img src="${business.image}" alt="${business.name}">
+                    <img src="${business.image}" alt="${business.name}"
+                         onerror="this.onerror=null;this.src='${getFallbackImageForCategory(business.category)}';">
                 </div>
                 <div class="business-content">
                     <h3>${business.name}</h3>
