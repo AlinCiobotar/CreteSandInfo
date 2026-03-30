@@ -1,29 +1,39 @@
 // Load partners data from JSON file
 let businesses = [];
-const partners = [
-    { id: 1, name: "Casa George", image: "images/casa-george.png" },
-    { id: 2, name: "Heraklion Taxi Service", image: "images/heraklion-taxi.png" }
-];
 
 // Load partners data on page load
 async function loadPartnersData() {
     try {
-        // Use inline partners list
-        businesses = partners.map(partner => ({
+        const [partnersResponse, imagesResponse] = await Promise.all([
+            fetch('partners_data.json'),
+            fetch('partners_images_compressed.json')
+        ]);
+
+        if (!partnersResponse.ok) {
+            throw new Error('Failed to load partners_data.json');
+        }
+
+        const partnersData = await partnersResponse.json();
+        const imagesData = imagesResponse.ok ? await imagesResponse.json() : {};
+
+        businesses = partnersData.map(partner => ({
             id: parseInt(partner.id, 10),
             name: partner.name,
-            category: partner.category || "accommodations",
-            location: partner.location || "Crete",
-            description: partner.description || "",
-            image: partner.image,
-            contact: partner.contact || "",
-            phone: partner.phone || "",
-            email: partner.email || "",
-            website: partner.website || "",
-            airbnb: partner.airbnb || ""
+            category: partner.category || 'accommodations',
+            location: partner.location || 'Crete',
+            description: partner.description || '',
+            image: getPartnerImage(partner, imagesData),
+            contact: partner.contact || '',
+            phone: partner.phone || '',
+            email: partner.email || '',
+            website: partner.website || '',
+            airbnb: partner.airbnb || ''
         }));
-        
+
         console.log('Partners data loaded successfully:', businesses.length, 'partners');
+        if (businesses.length === 0) {
+            console.warn('No partners loaded. Check partners_data.json content.');
+        }
         
         // Check for search parameters in URL and perform search if found
         checkUrlForSearch();
@@ -169,7 +179,7 @@ function getSampleBusinesses() {
             category: "restaurants",
             location: "Heraklion",
             description: "Authentic Greek cuisine with sea view",
-            image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+            image: "images/Bellot/image-1.jpg"
         },
         {
             id: 2,
@@ -177,7 +187,7 @@ function getSampleBusinesses() {
             category: "taxi",
             location: "Heraklion",
             description: "Reliable 24/7 taxi service",
-            image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+            image: "images/alina-rent-car/image-1.jpg"
         }
     ];
 }
