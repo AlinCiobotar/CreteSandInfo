@@ -10,9 +10,8 @@ const IMAGE_CONFIG = {
     // URL-ul pentru imaginile de pe Cloudflare R2
     cloudflareUrl: "https://pub-aff3cad8c0fa444e896b858926acb63b.r2.dev",
     
-    // URL-ul pentru imaginile de pe Supabase Storage
-    // Înlocuiește cu URL-ul tău real de Supabase
-    supabaseUrl: "https://alinciobotar.github.io/CreteSandInfo/images",
+    // Relative base path for project-hosted images
+    imagesBasePath: "images",
     
     // Calea către imaginile comprimate
     compressedPath: "images/partners-compressed",
@@ -27,9 +26,8 @@ function getImageUrl(folder, imageName, useCompressed = true) {
     // const fileName = `${folder}-${imageName}`;
     // return `${IMAGE_CONFIG.cloudflareUrl}/${fileName}`;
     
-    // Opțiunea 2: Folosește Supabase Storage
-    const fileName = `${folder}/${imageName}`;
-    return `${IMAGE_CONFIG.supabaseUrl}/${fileName}`;
+    // Use relative paths so they work in local and GitHub Pages deployments
+    return `${IMAGE_CONFIG.imagesBasePath}/${folder}/${imageName}`;
     
     // Opțiunea 3: Folosește GitHub Pages
     // return `${IMAGE_CONFIG.baseUrl}/${IMAGE_CONFIG.compressedPath}/${folder}/${imageName}`;
@@ -39,8 +37,8 @@ function getImageUrl(folder, imageName, useCompressed = true) {
 function getImageUrlWithFallback(folder, imageName) {
     const primaryUrl = getImageUrl(folder, imageName, true);
     
-    // Fallback pentru dezvoltare locală
-    const fallbackUrl = `images/partners-compressed/${folder}/${imageName}`;
+    // Local fallback path, also relative and case-sensitive
+    const fallbackUrl = `${IMAGE_CONFIG.imagesBasePath}/${folder}/${imageName}`;
     
     return {
         primary: primaryUrl,

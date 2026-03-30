@@ -4,8 +4,12 @@ let businesses = [];
 // Load partners data on page load
 async function loadPartnersData() {
     try {
-        const response = await fetch('partners_data.json');
-        const partnersData = await response.json();
+        const [partnersResponse, imagesResponse] = await Promise.all([
+            fetch('partners_data.json'),
+            fetch('partners_images_compressed.json')
+        ]);
+        const partnersData = await partnersResponse.json();
+        const imagesData = imagesResponse.ok ? await imagesResponse.json() : {};
         
         // Convert partners data to business format
         businesses = partnersData.map(partner => ({
@@ -14,7 +18,7 @@ async function loadPartnersData() {
             category: partner.category,
             location: partner.location || 'Crete',
             description: partner.description,
-            image: getPartnerImage(partner),
+            image: getPartnerImage(partner, imagesData),
             contact: partner.contact,
             phone: partner.phone,
             email: partner.email,
@@ -135,67 +139,12 @@ function showCopySuccessMessage() {
 }
 
 // Get appropriate image for partner
-function getPartnerImage(partner) {
-    // Map partner names to their image folders
-    const partnerImageMap = {
-        'The Greek Cook Out': 'greek-cook-out-image-1.jpg',
-        'Taverna Akrogiali': 'taverna-akrogiali-image-1.jpg', 
-        'Sunset Taverna': 'sunset-taverna-image-1.jpg',
-        'Allar Dinner Show': 'allar-dinner-show-image-1.jpg',
-        'Bellot': 'bellot image-1.jpg',
-        'Poliou House': 'poliou-house-image-1.jpg',
-        'Lovely Seaside Studio': 'lovely-seaside-studio-image-1.jpg',
-        'Sea Aura Apartment': 'sea-aura-apartment-image-1.jpg',
-        'Villa Dio Petres': 'villa-dio-petres-image-1.jpg',
-        'Villa Jasmin & Olives': 'villa-jasmin-olives-image-1.jpg',
-        'Villa Zax': 'villa-zax-image-1.jpg',
-        'Casa George': 'casa-george-image-1.jpg',
-        'Sougia Taxi & Minivan Services Vittorakis': 'sougia-taxi-image-1.jpg',
-        'Cretan Family Taxi': 'cretan-family-taxi-image-1.jpg',
-        'My Crete Transfer': 'my-crete-transfer-image-1.jpg',
-        'Crete Taxi Driver': 'crete-taxi-driver-image-1.jpg',
-        'Liv Tours and Transfer Chania': 'liv-tours-transfer-image-1.jpg',
-        'Heraklio Taxi': 'heraklio-taxi-image-1.jpg',
-        'Malia Cruises': 'malia-cruises-image-1.jpg',
-        'Sailing South Crete': 'sailing-south-crete',
-        'Vintage Sailings': 'vintage-sailings-image-1.jpg',
-        'Fantasia Yachting': 'fantasia-yachting-image-1.jpg',
-        'Balos Paradise Cruises': 'balos-paradise-cruises-image-1.jpg',
-        'Jet Boat Adventures': 'jet-boat-adventures-image-1.jpg',
-        'Vittorakis Travel': 'vittorakis-travel-image-1.jpg',
-        'Excursions in Crete': 'excursions-crete-image-1.jpg',
-        'Wanderlust Tour Chania': 'wanderlust-chania-image-1.jpg',
-        'IMable Travel': 'imable-travel-image-1.jpg',
-        'Chania Sea Experience': 'chania-sea-experience-image-1.jpg',
-        'Cretan Sailing Cruises': 'cretan-sailing-cruises-image-1.jpg',
-        'Alina Rent A Car': 'alina-rent-car-image-1.jpg',
-        'Compass Crete': 'compass-crete-image-1.jpg',
-        'Hermes Rental': 'hermes-rental-image-1.jpg',
-        'Rent from Locals': 'rent-from-locals-image-1.jpg',
-        'Mustang Crete Rent a Car': 'mustang-crete-image-1.jpg',
-        'Gia Panta Kalokairi Rent a Car': 'gia-panta-kalokairi-image-1.jpg',
-        'Fast and Easy Rent a Car': 'fast-easy-rent-image-1.jpg',
-        'Citycar Rent A Car': 'citycar-rent-image-1.jpg',
-        'Chania Car Rental': 'chania-car-rental-image-1.jpg',
-        'Heraklion Express Taxi': 'heraklion-express-taxi-image-1.jpg',
-        'Blue Sea Apartments': 'blue-sea-apartments-image-1.jpg',
-        'Heraklion Premium Cars': 'heraklion-premium-cars-image-1.jpg',
-        'Chania Boat Tours': 'chania-boat-tours-image-1.jpg',
-        'Mountain Adventures Crete': 'mountain-adventures-crete-image-1.jpg',
-        'Aroma Kritis': 'aroma-kritis-image-1.jpg'
-    };
-    
-    // Check if we have specific images for this partner
-    const imageFolder = partnerImageMap[partner.name];
-    if (imageFolder) {
-        // Some legacy mappings contain a full filename; convert them to folder slug.
-        const normalizedFolder = imageFolder
-            .replace(/\s*image-1\.jpg$/i, '')
-            .trim()
-            .replace(/\s+/g, '-');
-        return getImageUrl(normalizedFolder, 'image-1.jpg');
+function getPartnerImage(partner, imagesData = {}) {
+    const imageEntry = imagesData[String(partner.id)];
+    if (imageEntry && imageEntry.folder && Array.isArray(imageEntry.images) && imageEntry.images.length > 0) {
+        return getImageUrl(imageEntry.folder, imageEntry.images[0]);
     }
-    
+
     return getFallbackImageForCategory(partner.category);
 }
 
